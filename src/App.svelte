@@ -9,13 +9,6 @@
 </main>
 
 <style>
-  body {
-    background-color: #222;
-    color: #eee;
-    font-family: sans-serif;
-    padding: 1rem;
-  }
-
   main {
     max-width: 1000px;
     display: flex;

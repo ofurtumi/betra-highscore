@@ -7,6 +7,21 @@
     const response = await fetch(url);
     return await response.json();
   })();
+
+  let baseline = 0;
+
+  const is_baseline = (player: string) => {
+    if (player.includes("Random")) {
+      baseline++;
+      console.log(baseline);
+      return true;
+    }
+  };
+
+  function getBaseline() {
+    let temp = baseline;
+    return temp;
+  }
 </script>
 
 <section class="game">
@@ -16,7 +31,7 @@
     <h1>Leikur {game_num}</h1>
     <ul>
       {#each data as player}
-        {#if player.includes("Random")}
+        {#if is_baseline(player)}
           <li class="baseline">{player}</li>
         {:else}
           <li>{player}</li>
@@ -31,7 +46,7 @@
       <h1>Leikur {game_num}</h1>
       <ul>
         {#each again as player}
-          {#if player.includes("Random")}
+          {#if is_baseline(player)}
             <li class="baseline">{player}</li>
           {:else}
             <li>{player}</li>
@@ -66,16 +81,24 @@
 
   li {
     flex-grow: 0;
-    text-align: left;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  li:not(.baseline) {
+    background-color: gray;
+  }
+
+  li:not(.baseline)::after,
+  li:not(.baseline)::before {
+    content: " ✅ ";
+    text-shadow: black 1px 1px 1px;
   }
 
   li:nth-child(1),
   li:nth-child(2),
-  li:nth-child(3),
-  li:last-child {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  li:nth-child(3) {
     text-shadow: black 1px 1px 1px;
   }
 
@@ -106,15 +129,6 @@
     content: " 🥉 ";
   }
 
-  li:last-child {
-    flex-grow: 1;
-    color: #a04000;
-  }
-
-  li:last-child::before,
-  li:last-child::after {
-    content: " 💩 ";
-  }
   .baseline {
     margin: 0.1rem 0;
     border: 2px solid black;
@@ -123,5 +137,16 @@
     font-weight: bold;
     width: 100%;
     text-align: center;
+    justify-content: center;
+  }
+
+  .baseline ~ li:not(.baseline)::before,
+  .baseline ~ li:not(.baseline)::after {
+    content: " ⚠️ ";
+  }
+
+  .baseline ~ .baseline ~ li::before,
+  .baseline ~ .baseline ~ li::after {
+    content: " 🚫 ";
   }
 </style>
