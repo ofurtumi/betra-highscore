@@ -23,6 +23,24 @@
         {/if}
       {/each}
     </ul>
+  {:catch}
+    <h1>Eitthvað fór úrskeiðis</h1>
+    {#await fetch_data}
+      <p>Reyni aftur...</p>
+    {:then again}
+      <h1>Leikur {game_num}</h1>
+      <ul>
+        {#each again as player}
+          {#if player.includes("Random")}
+            <li class="baseline">{player}</li>
+          {:else}
+            <li>{player}</li>
+          {/if}
+        {/each}
+      </ul>
+    {:catch}
+      <h1>Tókst ekki að sækja gögn 😄</h1>
+    {/await}
   {/await}
 </section>
 
