@@ -18,8 +18,20 @@
 
   main {
     max-width: 1000px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
+  }
+  @media screen and (min-width: 700px) {
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    main {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 </style>
