@@ -17,7 +17,7 @@
   }
 
   main {
-    width: 90vw;
+    max-width: 1000px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
